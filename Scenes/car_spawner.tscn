@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://bk8wpd3i1uene"]
+
+[ext_resource type="Script" path="res://Scripts/car_spawner.gd" id="1_mdij3"]
+
+[node name="Car_spawner" type="Node"]
+script = ExtResource("1_mdij3")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="Cars" type="Node" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
