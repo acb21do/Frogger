@@ -33,7 +33,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"submerge",
-"speed": 5.0
+"speed": 2.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -47,7 +47,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"swim",
-"speed": 5.0
+"speed": 4.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e87iw"]
@@ -58,6 +58,7 @@ size = Vector2(16, 16)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_2atyr")
 animation = &"swim"
+frame_progress = 0.987056
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_e87iw")
