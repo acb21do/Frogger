@@ -19,7 +19,6 @@ config/icon="res://Asset/HomeFrog.png"
 
 window/size/viewport_width=224
 window/size/viewport_height=256
-window/stretch/mode="viewport"
 
 [rendering]
 

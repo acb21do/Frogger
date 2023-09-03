@@ -1,0 +1,2 @@
+extends CarSpawner
+class_name TurtleSpawner

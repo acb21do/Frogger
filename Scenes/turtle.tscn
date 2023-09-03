@@ -1,67 +1,20 @@
-[gd_scene load_steps=9 format=3 uid="uid://d0gqfo1re7143"]
+[gd_scene load_steps=3 format=3 uid="uid://d0gqfo1re7143"]
 
-[ext_resource type="Texture2D" uid="uid://b3d6g83an6yvx" path="res://Asset/turtle_spritesheet.png" id="1_g4ftu"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_p2fpr"]
-atlas = ExtResource("1_g4ftu")
-region = Rect2(48, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_85djm"]
-atlas = ExtResource("1_g4ftu")
-region = Rect2(64, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tkco8"]
-atlas = ExtResource("1_g4ftu")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_g3gsp"]
-atlas = ExtResource("1_g4ftu")
-region = Rect2(16, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_f5br2"]
-atlas = ExtResource("1_g4ftu")
-region = Rect2(32, 0, 16, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_2atyr"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_p2fpr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_85djm")
-}],
-"loop": true,
-"name": &"submerge",
-"speed": 2.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_tkco8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_g3gsp")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_f5br2")
-}],
-"loop": true,
-"name": &"swim",
-"speed": 4.0
-}]
+[ext_resource type="Script" path="res://Scripts/turtle.gd" id="1_ac66q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e87iw"]
 size = Vector2(16, 16)
 
-[node name="Turtle" type="Area2D"]
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_2atyr")
-animation = &"swim"
-frame_progress = 0.987056
+[node name="Turtles" type="Area2D"]
+script = ExtResource("1_ac66q")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_e87iw")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(8, 0)
 scale = Vector2(0.8, 0.8)
+
+[node name="Turtles" type="Node" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

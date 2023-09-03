@@ -1,0 +1,75 @@
+[gd_scene load_steps=11 format=3 uid="uid://d0gqfo1re7143"]
+
+[ext_resource type="Script" path="res://Scripts/turtle.gd" id="1_ac66q"]
+[ext_resource type="Texture2D" uid="uid://b3d6g83an6yvx" path="res://Asset/turtle_spritesheet.png" id="2_ot1qo"]
+[ext_resource type="Texture2D" uid="uid://bdt1b4eyibx1l" path="res://Asset/Water.png" id="3_g1few"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e87iw"]
+size = Vector2(16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tsk3s"]
+atlas = ExtResource("2_ot1qo")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h4vry"]
+atlas = ExtResource("2_ot1qo")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2fypn"]
+atlas = ExtResource("2_ot1qo")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7o6g2"]
+atlas = ExtResource("2_ot1qo")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ar028"]
+atlas = ExtResource("2_ot1qo")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ls50l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tsk3s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h4vry")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2fypn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7o6g2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ar028")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_g1few")
+}],
+"loop": true,
+"name": &"submerge",
+"speed": 3.0
+}]
+
+[node name="Turtles" type="Area2D"]
+script = ExtResource("1_ac66q")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_e87iw")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(8, 0)
+scale = Vector2(0.8, 0.8)
+
+[node name="Turtles" type="Node" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_ls50l")
+animation = &"submerge"
+frame = 3
+frame_progress = 0.528898
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

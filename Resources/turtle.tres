@@ -1,0 +1,76 @@
+[gd_resource type="SpriteFrames" load_steps=11 format=3 uid="uid://kfx2x403gsdy"]
+
+[ext_resource type="Texture2D" uid="uid://b3d6g83an6yvx" path="res://Asset/turtle_spritesheet.png" id="1_3drm1"]
+[ext_resource type="Texture2D" uid="uid://bdt1b4eyibx1l" path="res://Asset/Water.png" id="2_wk3lk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uhws0"]
+atlas = ExtResource("1_3drm1")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qt7qw"]
+atlas = ExtResource("1_3drm1")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2iodd"]
+atlas = ExtResource("1_3drm1")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jfeau"]
+atlas = ExtResource("1_3drm1")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q7lhj"]
+atlas = ExtResource("1_3drm1")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tkco8"]
+atlas = ExtResource("1_3drm1")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g3gsp"]
+atlas = ExtResource("1_3drm1")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f5br2"]
+atlas = ExtResource("1_3drm1")
+region = Rect2(32, 0, 16, 16)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uhws0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qt7qw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2iodd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jfeau")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q7lhj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_wk3lk")
+}],
+"loop": false,
+"name": &"submerge",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tkco8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g3gsp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f5br2")
+}],
+"loop": true,
+"name": &"swim",
+"speed": 4.0
+}]
