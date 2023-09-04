@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cc6upti3v2bp1"]
+[gd_scene load_steps=12 format=3 uid="uid://cc6upti3v2bp1"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_0t0d8"]
 [ext_resource type="Texture2D" uid="uid://4l3fulr53151" path="res://Asset/Median.png" id="1_ipalf"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bdt1b4eyibx1l" path="res://Asset/Water.png" id="3_ca28n"]
 [ext_resource type="Texture2D" uid="uid://7ckp761fx65b" path="res://Asset/Turtle_02.png" id="5_ltqc3"]
 [ext_resource type="Texture2D" uid="uid://fwv4seydp6fb" path="res://Asset/Car5.png" id="6_gwc2w"]
+[ext_resource type="PackedScene" uid="uid://ce08njk3qhrpl" path="res://Scenes/player.tscn" id="7_tee28"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rp12k"]
 texture = ExtResource("1_ipalf")
@@ -70,3 +71,6 @@ texture = ExtResource("6_gwc2w")
 [node name="CarSpawners" type="Node" parent="."]
 
 [node name="TurtleSpawners" type="Node" parent="."]
+
+[node name="Player" parent="." instance=ExtResource("7_tee28")]
+position = Vector2(112, 232)

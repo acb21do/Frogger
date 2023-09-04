@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://ce08njk3qhrpl"]
+
+[ext_resource type="Script" path="res://Scenes/player.gd" id="1_oh66u"]
+[ext_resource type="Texture2D" uid="uid://cg011pqit8rfk" path="res://Asset/FroggerIdle.png" id="1_uy1kf"]
+[ext_resource type="Texture2D" uid="uid://b6bgb2oalbgse" path="res://Asset/FroggerLeap.png" id="2_lwly2"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nttx1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_uy1kf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_lwly2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_uy1kf")
+}],
+"loop": false,
+"name": &"hop",
+"speed": 7.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bdt8n"]
+size = Vector2(16, 16)
+
+[node name="Player" type="Area2D"]
+script = ExtResource("1_oh66u")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_nttx1")
+animation = &"hop"
+frame = 2
+frame_progress = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_bdt8n")
