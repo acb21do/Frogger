@@ -6,6 +6,11 @@ extends Node
 @onready var car_spawner_scene : PackedScene = preload("res://Scenes/car_spawner.tscn")
 
 
+@onready var player = $Player
+
+
+
+
 var car1_spawner : CarSpawner
 var car2_spawner : CarSpawner
 var car3_spawner : CarSpawner
@@ -74,6 +79,8 @@ var turtle1_set_distance : Array[float] = [1.0, 1.0, 4.0, 3.0, 6.5]
 
 
 func _ready() -> void:
+	#player.dead.connect()
+	
 	start_level()
 	
 	
@@ -153,7 +160,7 @@ func start_level() -> void:
 	car5_spawner.separation_distance = car5_separation_distance[current_level]
 	car5_spawner.start_pos = car5_start_pos[current_level]
 	car5_spawner.num_of_cars = car5_num_of_cars[current_level]
-	car5_spawner.car_scene = car_scene #Static
+	car5_spawner.car_scene = truck_scene #Static
 	car5_spawner.car_speed = car5_car_speed[current_level]
 	car5_spawner.direction = -1# Static
 	car5_spawner.set_distance = car5_set_distance[current_level]

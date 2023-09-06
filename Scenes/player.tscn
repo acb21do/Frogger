@@ -1,15 +1,67 @@
-[gd_scene load_steps=6 format=3 uid="uid://ce08njk3qhrpl"]
+[gd_scene load_steps=14 format=3 uid="uid://ce08njk3qhrpl"]
 
 [ext_resource type="Script" path="res://Scenes/player.gd" id="1_oh66u"]
 [ext_resource type="Texture2D" uid="uid://cg011pqit8rfk" path="res://Asset/FroggerIdle.png" id="1_uy1kf"]
 [ext_resource type="Texture2D" uid="uid://b6bgb2oalbgse" path="res://Asset/FroggerLeap.png" id="2_lwly2"]
+[ext_resource type="Texture2D" uid="uid://djctoeo2h8rxc" path="res://Asset/death_spritesheet.png" id="2_nbiox"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jq4ml"]
+atlas = ExtResource("2_nbiox")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m2mfd"]
+atlas = ExtResource("2_nbiox")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sre54"]
+atlas = ExtResource("2_nbiox")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_psmek"]
+atlas = ExtResource("2_nbiox")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b6tw5"]
+atlas = ExtResource("2_nbiox")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_taqn1"]
+atlas = ExtResource("2_nbiox")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_daaja"]
+atlas = ExtResource("2_nbiox")
+region = Rect2(96, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_nttx1"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_uy1kf")
+"texture": SubResource("AtlasTexture_jq4ml")
 }, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m2mfd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sre54")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_psmek")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b6tw5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_taqn1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_daaja")
+}],
+"loop": false,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_lwly2")
 }, {
@@ -22,16 +74,26 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bdt8n"]
-size = Vector2(16, 16)
+size = Vector2(12, 9)
 
 [node name="Player" type="Area2D"]
+collision_layer = 0
 script = ExtResource("1_oh66u")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_nttx1")
 animation = &"hop"
-frame = 2
-frame_progress = 1.0
+
+[node name="RayCast2D" type="RayCast2D" parent="AnimatedSprite2D"]
+target_position = Vector2(0, -9)
+collision_mask = 2
+collide_with_areas = true
+collide_with_bodies = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_bdt8n")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]

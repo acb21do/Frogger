@@ -3,9 +3,9 @@
 [ext_resource type="Script" path="res://Scripts/turtle.gd" id="1_ac66q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e87iw"]
-size = Vector2(16, 16)
+size = Vector2(32, 16)
 
-[node name="Turtles" type="Area2D"]
+[node name="Turtles" type="Area2D" groups=["floating"]]
 script = ExtResource("1_ac66q")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

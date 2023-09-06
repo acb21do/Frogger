@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://csqe2iduxdfdx"]
+
+[ext_resource type="Texture2D" uid="uid://e8xh4gxdd4x4" path="res://Asset/Home.png" id="1_2b10p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yq08d"]
+size = Vector2(14, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lxjhf"]
+size = Vector2(14, 20)
+
+[node name="Home" type="Area2D"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_2b10p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-17, 1)
+shape = SubResource("RectangleShape2D_yq08d")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(17, 1)
+shape = SubResource("RectangleShape2D_lxjhf")

@@ -13,7 +13,6 @@ script = ExtResource("1_oseal")
 texture = ExtResource("1_28jl1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_3a2ts")
 

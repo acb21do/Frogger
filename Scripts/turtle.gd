@@ -1,4 +1,5 @@
 extends Area2D
+class_name Turtle
 
 var speed : float
 var num_of_turtles : int
@@ -14,9 +15,11 @@ var count : int =0
 func _ready() -> void:
 	var turtle_pos : Array[Vector2]
 	if num_of_turtles == 2:
+		$CollisionShape2D.shape.size = Vector2(32,16)
 		$VisibleOnScreenNotifier2D.position = Vector2(8,0)
 		turtle_pos = [Vector2(-8,0), Vector2(8,0)]
 	else:
+		$CollisionShape2D.shape.size = Vector2(47,16)
 		$VisibleOnScreenNotifier2D.position = Vector2(16,0)
 		turtle_pos = [Vector2(-16,0), Vector2(0,0), Vector2(16,0)]
 
@@ -62,4 +65,5 @@ func change_anim(animated_sprite: AnimatedSprite2D) -> void:
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	queue_free()
+
 
