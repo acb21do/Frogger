@@ -19,6 +19,7 @@ var is_turtle : bool = false
 var current_frame : int = 0
 var current_frame_progress : float = 0.0
 
+var is_log : bool = false
 
 func _ready() -> void:
 	separation_distance = (separation_distance * 16.0) + car_width
@@ -51,17 +52,18 @@ func spawn_cars() -> void:
 		var car : Area2D = car_scene.instantiate()
 		car.global_position = Vector2(start_pos.x + (direction * -1 * (i * separation_distance + car_width - 16.0)), start_pos.y)
 		car.speed = car_speed * direction
+		if is_log:
+			car.num_of_logs = int(car_width/ 16.0)
 		if is_turtle:
 			car.num_of_turtles = int(car_width / 16.0)
 			car.current_frame = current_frame
 			car.current_frame_progress = current_frame_progress
 			if i == 0:
 				car.diving_turtle = true
-			
-			
+
 		$Cars.add_child(car)
 		if is_turtle:
 			current_frame = car.get_frame()
 			current_frame_progress = car.get_frame_progress()
-		else:
+		elif not is_turtle and not is_log:
 			car.sprite_2d.texture = load("res://Asset/Car"+car_type+".png")

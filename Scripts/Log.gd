@@ -1,7 +1,7 @@
 extends Area2D
 
 var speed : float
-var num_of_logs : int
+var num_of_logs : int = 3
 
 var log_end_sprite : CompressedTexture2D = preload("res://Asset/LogEnd.png")
 var log_mid_sprite : CompressedTexture2D = preload("res://Asset/LogMiddle.png")

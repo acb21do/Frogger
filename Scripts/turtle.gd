@@ -2,19 +2,18 @@ extends Area2D
 class_name Turtle
 
 var speed : float
-var num_of_turtles : int
+var num_of_turtles : int = 2
 var diving_turtle : bool = false
 var current_frame : int
 var current_frame_progress : float
 var dived : bool = false
-var count : int =0
+var count : int = 0
 
 
 @onready var r_turtle_animated_sprite = load("res://Resources/turtle.tres")
 
 
 func _ready() -> void:
-	print("d")#typeof(log_end_sprite))
 	var turtle_pos : Array[Vector2]
 	if num_of_turtles == 2:
 		$CollisionShape2D.shape.size = Vector2(32,16)

@@ -3,6 +3,7 @@ extends Node
 @onready var car_scene : PackedScene = preload("res://Scenes/car.tscn")
 @onready var truck_scene : PackedScene = preload("res://Scenes/truck.tscn")
 @onready var turtle_scene : PackedScene = preload("res://Scenes/turtle.tscn")
+@onready var log_scene : PackedScene = preload("res://Scenes/log.tscn")
 @onready var car_spawner_scene : PackedScene = preload("res://Scenes/car_spawner.tscn")
 
 
@@ -18,6 +19,7 @@ var car4_spawner : CarSpawner
 var car5_spawner : CarSpawner
 
 var turtle1_spawner : CarSpawner
+var log1_spawner : CarSpawner
 
 
 var current_level : int = 0
@@ -69,6 +71,8 @@ var car5_set_distance : Array[float] = [8.5, 3.5, 5.0, 2.0, 7.0]
 #Turtle lvl4 start pos (40,120)
 #Turtle lvl5 start pos (96,120)
 
+#216,104
+
 var turtle1_separation_distance : Array[float] = [1.0, 3.0, 1.5, 2.0, 3.5]
 var turtle1_start_pos : Array[Vector2] = [Vector2(8,120), Vector2(8,120), Vector2(56,120), Vector2(40,120), Vector2(96,120)]
 var turtle1_num_of_cars : Array[int] = [4, 3, 3, 3, 2]
@@ -77,10 +81,16 @@ var turtle1_car_speed : Array[float] = [5.0/2.7, 5.0/2.7, 5.0/1.25, 5.0/1.25, 5.
 var turtle1_direction : int = -1 #Static
 var turtle1_set_distance : Array[float] = [1.0, 1.0, 4.0, 3.0, 6.5]
 
+var log1_separation_distance : Array[float] = [2.0, 3.0, 1.5, 2.0, 3.5]
+var log1_start_pos : Array[Vector2] = [Vector2(216,104), Vector2(8,120), Vector2(56,120), Vector2(40,120), Vector2(96,120)]
+var log1_num_of_cars : Array[int] = [3, 3, 3, 3, 2]
+var log1_car_scene : PackedScene = log_scene #Static
+var log1_car_speed : Array[float] = [5.0/6.5, 5.0/2.7, 5.0/1.25, 5.0/1.25, 5.0/1.25]
+var log1_direction : int = 1 #Static
+var log1_set_distance : Array[float] = [3.0, 1.0, 4.0, 3.0, 6.5]
 
 func _ready() -> void:
 	#player.dead.connect()
-	
 	start_level()
 	
 	
@@ -91,7 +101,9 @@ func next_level() -> void:
 		car_spawner.queue_free()
 	for turtle_spawner in $TurtleSpawners.get_children():
 		turtle_spawner.queue_free()
-
+	for log_spawner in $LogSpawners.get_children():
+		log_spawner.queue_free()
+		
 	current_level = (current_level + 1) % 5
 	if current_level == 2:
 		car1_car_speed = [5.0/2.5, 5.0/2.5, 5.0/2.5, 5.0/2.5, 5.0/2.5]
@@ -100,6 +112,7 @@ func next_level() -> void:
 		car4_car_speed = [10.0/1.375, 10.0/1.375, 10.0/1.375, 10.0/1.375, 10.0/1.375]
 		car5_car_speed = [5.0/4.0, 5.0/4.0, 5.0/4.0, 5.0/4.0, 5.0/4.0]
 		turtle1_car_speed = [5.0/1.25, 5.0/1.25, 5.0/1.25, 5.0/1.25, 5.0/1.25]
+		log1_car_speed = [5.0/1.25, 5.0/1.25, 5.0/1.25, 5.0/1.25, 5.0/1.25]
 	start_level()
 
 func _process(delta):
@@ -177,8 +190,20 @@ func start_level() -> void:
 	turtle1_spawner.car_speed = turtle1_car_speed[current_level]
 	turtle1_spawner.direction = -1# Static
 	turtle1_spawner.set_distance = turtle1_set_distance[current_level]
-	#turtle1_spawner.car_type = "5"# Static
-	turtle1_spawner.car_width = 16 * 3
+	turtle1_spawner.car_width = 16.0 * 3.0
 	turtle1_spawner.is_turtle = true
 	$TurtleSpawners.add_child(turtle1_spawner)
 	turtle1_spawner.spawn_cars()
+	#Log 1
+	log1_spawner = car_spawner_scene.instantiate()
+	log1_spawner.separation_distance = log1_separation_distance[current_level]
+	log1_spawner.start_pos = log1_start_pos[current_level]
+	log1_spawner.num_of_cars = log1_num_of_cars[current_level]
+	log1_spawner.car_scene = log_scene #Static
+	log1_spawner.car_speed = log1_car_speed[current_level]
+	log1_spawner.direction = 1# Static
+	log1_spawner.set_distance = log1_set_distance[current_level]
+	log1_spawner.car_width = 16.0 * 3.0
+	log1_spawner.is_log = true
+	$LogSpawners.add_child(log1_spawner)
+	log1_spawner.spawn_cars()
