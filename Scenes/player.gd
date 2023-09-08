@@ -16,9 +16,12 @@ var state : STATE = STATE.ALIVE
 var move_timer : float = 0.200
 var curent_time : float = 0
 var direction : Vector2 = Vector2.ZERO
+
 var on_floating_object : bool = false
 var floating_object_dir : float = 0.0
 
+var water_pos_y : float = 120.0
+var on_water : bool = false
 
 
 func _unhandled_input(event) -> void:
@@ -40,9 +43,16 @@ func _unhandled_input(event) -> void:
 
 func _physics_process(delta) -> void:
 	if state == STATE.ALIVE:
+		#Update pos
 		if curent_time > move_timer and !ray_cast_2d.is_colliding():
 			global_position = global_position + (direction * 16.0)
+			#Move the player if a button was pressed
 			if direction != Vector2.ZERO:
+				#Checks if the player is on water
+				if global_position.y <= water_pos_y:
+					on_water = true
+				else:
+					on_water = false
 				$AnimatedSprite2D.rotation = Vector2.UP.angle_to(direction)
 				$AnimatedSprite2D.stop()
 				$AnimatedSprite2D.play("hop")
@@ -69,23 +79,25 @@ func respawn(state : STATE) -> void:
 	self.state = STATE.ALIVE
 	$AnimatedSprite2D.animation = "hop"
 	$AnimatedSprite2D.frame = 1
-	
 
 
 func _on_area_entered(area) -> void:
+	print(area.name)
 	if area.is_in_group("floating"):
 		floating_object_dir = area.speed
 		on_floating_object = true
 	else:
 		if not on_floating_object:
 			death()
-
+	print(get_overlapping_areas())
 
 func _on_area_exited(area) -> void:
 	if area.is_in_group("floating"):
 		floating_object_dir = 0.0
 		round_position(global_position.x)
 		on_floating_object = false
+		if on_water:
+			death()
 
 
 func round_position(pos_x : float) -> void:

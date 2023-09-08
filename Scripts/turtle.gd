@@ -9,10 +9,12 @@ var current_frame_progress : float
 var dived : bool = false
 var count : int =0
 
+
 @onready var r_turtle_animated_sprite = load("res://Resources/turtle.tres")
 
 
 func _ready() -> void:
+	print("d")#typeof(log_end_sprite))
 	var turtle_pos : Array[Vector2]
 	if num_of_turtles == 2:
 		$CollisionShape2D.shape.size = Vector2(32,16)
@@ -24,17 +26,18 @@ func _ready() -> void:
 		turtle_pos = [Vector2(-16,0), Vector2(0,0), Vector2(16,0)]
 
 	for i in range(num_of_turtles):
-			var turtle_sprite : AnimatedSprite2D = AnimatedSprite2D.new()
-			turtle_sprite.sprite_frames = r_turtle_animated_sprite
-			turtle_sprite.position = turtle_pos[i]
-			if diving_turtle:
-				turtle_sprite.play("submerge")
-				if i == 0:
-					turtle_sprite.animation_finished.connect(change_anim.bind(turtle_sprite))
-			else:
-				turtle_sprite.play("swim")
-				turtle_sprite.set_frame_and_progress(current_frame, current_frame_progress)
-			add_child(turtle_sprite)
+		var turtle_sprite : AnimatedSprite2D = AnimatedSprite2D.new()
+		turtle_sprite.sprite_frames = r_turtle_animated_sprite
+		turtle_sprite.position = turtle_pos[i]
+		if diving_turtle:
+			turtle_sprite.play("submerge")
+			if i == 0:
+				turtle_sprite.animation_finished.connect(change_anim.bind(turtle_sprite))
+				turtle_sprite.frame_changed.connect(update_collision.bind(turtle_sprite))
+		else:
+			turtle_sprite.play("swim")
+			turtle_sprite.set_frame_and_progress(current_frame, current_frame_progress)
+		add_child(turtle_sprite)
 
 
 func get_frame() -> int:
@@ -61,6 +64,13 @@ func change_anim(animated_sprite: AnimatedSprite2D) -> void:
 		#animated_sprite.play_backwards()
 		dived = true
 	count += 1
+
+
+func update_collision(animated_sprite : AnimatedSprite2D) -> void:
+	if animated_sprite.frame < 4:
+		$CollisionShape2D.disabled = false
+	else:
+		$CollisionShape2D.disabled = true
 
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
